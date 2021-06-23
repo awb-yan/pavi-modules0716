@@ -6,8 +6,9 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class report_account_aged_partner(models.AbstractModel):
-    _inherit = "account.aged.partner"
+class report_account_aged_receivable(models.AbstractModel):
+    _inherit = "account.aged.receivable"
+    _description = "Aged Receivable"
 
     filter_analytic = True
 
