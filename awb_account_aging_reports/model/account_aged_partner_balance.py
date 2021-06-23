@@ -14,7 +14,7 @@ class report_account_aged_receivable(models.AbstractModel):
 
     def _get_options(self, previous_options=None):
         _logger.debug(f'Prev Options: {previous_options}')
-        options = super(report_account_aged_partner, self)._get_options(previous_options)
+        options = super(report_account_aged_receivable, self)._get_options(previous_options)
         if previous_options and 'account_accounts' not in previous_options.keys():
             options['account_accounts'] = []
 
