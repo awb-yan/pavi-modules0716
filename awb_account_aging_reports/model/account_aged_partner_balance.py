@@ -6,32 +6,14 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class report_account_aged_receivable(models.AbstractModel):
-    _inherit = "account.aged.receivable"
-    _description = "Aged Receivable"
+class report_account_aged_partner(models.AbstractModel):
+    _inherit = "account.aged.partner"
 
     filter_analytic = True
 
-    def _get_columns_name(self, options):
-        columns = super(report_account_aged_receivable, self)._get_columns_name(options)
-        columns.insert(1, {'name': _("Trade Receivables (Active)"), 'class': '', 'style': 'text-align:center; white-space:nowrap;'})
-        columns.insert(2, {'name': _("Trade Receivables (Disconnect)"), 'class': '', 'style': 'white-space:nowrap;'})
-        columns.insert(3, {'name': _("Due Date"), 'class': 'date', 'style': 'white-space:nowrap;'})
-        columns.insert(4, {'name': _("Journal"), 'class': '', 'style': 'white-space:nowrap;'})
-        columns.insert(5, {'name': _("Account"), 'class': '', 'style': 'white-space:nowrap;'})
-        columns.insert(6, {'name': _("Exp. Date"), 'class': 'date', 'style': 'white-space:nowrap;'})
-#        columns.insert(7, {'name': _("As of " + date), 'class': '', 'style': 'white-space:nowrap;'})
-        columns.insert(8, {'name': _("1 - 30"), 'class': '', 'style': 'white-space:nowrap;'})
-        columns.insert(9, {'name': _("31 - 60"), 'class': '', 'style': 'white-space:nowrap;'})
-        columns.insert(10, {'name': _("61 - 90"), 'class': '', 'style': 'white-space:nowrap;'})
-        columns.insert(11, {'name': _("91 - 120"), 'class': '', 'style': 'white-space:nowrap;'})
-        columns.insert(12, {'name': _("Older"), 'class': '', 'style': 'white-space:nowrap;'})
-        columns.insert(13, {'name': _("Total"), 'class': '', 'style': 'white-space:nowrap;'})
-        return columns
-        
     def _get_options(self, previous_options=None):
         _logger.debug(f'Prev Options: {previous_options}')
-        options = super(report_account_aged_receivable, self)._get_options(previous_options)
+        options = super(report_account_aged_partner, self)._get_options(previous_options)
         if previous_options and 'account_accounts' not in previous_options.keys():
             options['account_accounts'] = []
 
