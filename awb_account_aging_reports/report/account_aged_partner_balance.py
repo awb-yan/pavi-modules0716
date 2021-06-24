@@ -41,11 +41,13 @@ class report_account_aged_receivable(models.AbstractModel):
 
         _logger.debug(f'Context: {ctx}')
 
+        # YAN: get ageing range
         periods = {}
         date_from = fields.Date.from_string(date_from)
         start = date_from
-        for i in range(5)[::-1]:
-            stop = start - relativedelta(days=period_length)
+        # YAN: loop until we get accounts that are ageing for > 150 days
+        for i in range(6)[::-1]:
+            stop = start - relativedelta(days=period_length) # YAN: stop = start - 30 days
             period_name = str((5-(i+1)) * period_length + 1) + '-' + str((5-i) * period_length)
             period_stop = (start - relativedelta(days=1)).strftime('%Y-%m-%d')
             if i == 0:

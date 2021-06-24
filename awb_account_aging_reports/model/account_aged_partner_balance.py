@@ -6,10 +6,19 @@ import logging
 _logger = logging.getLogger(__name__)
 
 
-class report_account_aged_partner(models.AbstractModel):
-    _inherit = "account.aged.partner"
+#class report_account_aged_partner(models.AbstractModel):
+#    _inherit = "account.aged.partner"
+class report_account_aged_receivable(models.AbstractModel):
+    _inherit = "account.aged.receivable"
+    _description = "Aged Receivable"
 
     filter_analytic = True
+
+    def _get_columns_name(self, options):
+        columns = super(report_account_aged_receivable, self)._get_columns_name(options)
+        columns.insert(1, {'name': _("Trade Receivables (Active)"), 'class': '', 'style': 'text-align:center; white-space:nowrap;'})
+        columns.insert(2, {'name': _("Trade Receivables (Disconnect)"), 'class': '', 'style': 'white-space:nowrap;'})
+        return columns
 
     def _get_options(self, previous_options=None):
         _logger.debug(f'Prev Options: {previous_options}')
