@@ -127,6 +127,12 @@ class report_account_aged_receivable(models.AbstractModel):
     _inherit = "account.aged.receivable"
     _description = "Aged Receivable"
 
+    def _get_columns_name(self, options):
+        columns = super(report_account_aged_receivable, self)._get_columns_name(options)
+        columns.insert(1, {'name': _("Trade Receivables (Active)"), 'class': '', 'style': 'text-align:center; white-space:nowrap;'})
+        columns.insert(2, {'name': _("Trade Receivables (Disconnect)"), 'class': '', 'style': 'white-space:nowrap;'})
+        return columns
+
     def _get_lines(self, options, line_id=None):
         lines = super(report_account_aged_receivable, self)._get_lines(options, line_id)
         
