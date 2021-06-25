@@ -10,21 +10,12 @@ from dateutil.relativedelta import relativedelta
 
 _logger = logging.getLogger(__name__)
 
-# YAN
-# class ReportAgedPartnerBalance(models.AbstractModel):
-#    _name = 'report.account.report_agedpartnerbalance_account'
-#     _inherit = 'report.account.report_agedpartnerbalance'
-#     _description = 'Aged Partner Balance Report'
-class report_account_aged_receivable(models.AbstractModel):
-    _inherit = "account.aged.receivable"
-    _description = "Aged Receivable"
 
-    def _get_columns_name(self, options):
-        columns = super(report_account_aged_receivable, self)._get_columns_name(options)
-        columns.insert(1, {'name': _("Trade Receivables (Active)"), 'class': '', 'style': 'text-align:center; white-space:nowrap;'})
-        columns.insert(2, {'name': _("Trade Receivables (Disconnect)"), 'class': '', 'style': 'white-space:nowrap;'})
-        return columns
-        
+class ReportAgedPartnerBalance(models.AbstractModel):
+    _name = 'report.account.report_agedpartnerbalance_account'
+    _inherit = 'report.account.report_agedpartnerbalance'
+    _description = 'Aged Partner Balance Report'
+
     def _get_partner_move_lines(self, account_type, date_from, target_move, period_length):
         # This method can receive the context key 'include_nullified_amount' {Boolean}
         # Do an invoice and a payment and unreconcile. The amount will be nullified
@@ -41,13 +32,11 @@ class report_account_aged_receivable(models.AbstractModel):
 
         _logger.debug(f'Context: {ctx}')
 
-        # YAN: get ageing range
         periods = {}
         date_from = fields.Date.from_string(date_from)
         start = date_from
-        # YAN: loop until we get accounts that are ageing for > 150 days
-        for i in range(6)[::-1]:
-            stop = start - relativedelta(days=period_length) # YAN: stop = start - 30 days
+        for i in range(5)[::-1]:
+            stop = start - relativedelta(days=period_length)
             period_name = str((5-(i+1)) * period_length + 1) + '-' + str((5-i) * period_length)
             period_stop = (start - relativedelta(days=1)).strftime('%Y-%m-%d')
             if i == 0:
