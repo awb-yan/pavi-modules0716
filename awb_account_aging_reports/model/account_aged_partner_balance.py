@@ -141,6 +141,8 @@ class report_account_aged_receivable(models.AbstractModel):
             columns = line['columns']
             if line.get('class', '') == 'date':
                 _logger.debug(f'Child Lines {line}')
+                
+                # YAN: this part will populate the new columns
                 item = self.env['account.move.line'].browse(line['id'])
                 move_item = item.move_id
                 ref_no = move_item.ref if move_item.ref else ''
