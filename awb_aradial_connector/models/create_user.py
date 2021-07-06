@@ -4,9 +4,16 @@ from psycopg2.extensions import AsIs
 import datetime
 import logging
 
-_logger = logging.getLogger('AWB-Aradial')
+_logger = logging.getLogger(__name__)
 
 class UserCreation(models.Model):
+
+    def test_function(self):
+        print('===== Created User =====', flush=True)
+        print('=====  =====', flush=True)
+        print('=====  =====', flush=True)
+        print('=====  =====', flush=True)
+        print('===== Created User =====', flush=True)        
 
     def user_creation(self):
         _name = 'awb.aradial.connector'
