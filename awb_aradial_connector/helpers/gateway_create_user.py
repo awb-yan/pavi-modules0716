@@ -19,9 +19,9 @@ class AradialAPIGateway(object):
     def create_user_in_aradial(
         self
     ):
-        data = {                                                #TODO: hard-coded
-            'UserID': 'user6',
-            'Password': 'password',
+        data = {                                    #TODO: hard-coded
+            'UserID': 'user6',                      #subscription id from Odoo
+            'Password': 'password',                 #system generated?
             'Offer': 'Unlimited'
         }
 
@@ -36,6 +36,8 @@ class AradialAPIGateway(object):
         return res
 
     def create_user(self):
+        # get UserId, password and Offer here before calling create_user_in_aradial()
+         
         res = self.create_user_in_aradial()
         state = "created" if res.status_code == 201 else "failed"
 

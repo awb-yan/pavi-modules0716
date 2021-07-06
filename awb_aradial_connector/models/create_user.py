@@ -9,6 +9,9 @@ _logger = logging.getLogger('AWB-Aradial')
 class UserCreation(models.Model):
 
     def user_creation(self):
+        _name = 'awb.aradial.connector'
+        _description = 'AWB Aradial Connector'
+
 
         params = self.env['ir.config_parameter'].sudo()
         aradial_url = params.get_param('aradial_url')
