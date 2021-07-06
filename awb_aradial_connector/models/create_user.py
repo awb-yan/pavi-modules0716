@@ -4,7 +4,7 @@ from psycopg2.extensions import AsIs
 import datetime
 import logging
 
-_logger = logging.getLogger(__name__)
+_logger = logging.getLogger('AWB-Aradial')
 
 class UserCreation(models.Model):
 
@@ -16,4 +16,5 @@ class UserCreation(models.Model):
         # sms_gateway_token = params.get_param('smart_gateway_token')
         user = AradialAPIGateway()
         created_user = user.create_user()
+        _logger = logging.getLogger(created_user)
         
