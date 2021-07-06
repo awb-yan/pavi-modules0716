@@ -5,14 +5,16 @@ from odoo import exceptions
 
 class AradialAPIGateway(object):
     def __init__(
-        self
+        self,
+        url,
+        token
     ):
         self.headers = {
             'Content-Type': 'application/json',
-            'Authorization': 'Basic QVBJVXNlcjpwYXNzd29yZA=='   #TODO: hard-coded
+            'Authorization': token
         }
 
-        self.url = 'http://172.16.101.2/api/users'              #TODO: hard-coded
+        self.url = url
 
     def create_user_in_aradial(
         self
