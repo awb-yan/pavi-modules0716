@@ -22,5 +22,9 @@ class UserCreation(models.Model):
             token=aradial_token
         )
         created_user = user.create_user()
+        print('===== Created User =====', flush=True)
+        print('===== , created_user , =====', flush=True)
+        print('===== Created User =====', flush=True)
+
         _logger = logging.getLogger(created_user)
         
