@@ -35,7 +35,7 @@ class AradialAPIGateway(object):
 
     def create_user(self):
         res = self.create_user_in_aradial()
-        state = "created" if res.status_code = 201 else "failed"
+        state = "created" if res.status_code == 201 else "failed"
 
         return state
 
