@@ -38,4 +38,3 @@ class AradialAPIGateway(object):
         state = "created" if res.status_code == 201 else "failed"
 
         return state
-

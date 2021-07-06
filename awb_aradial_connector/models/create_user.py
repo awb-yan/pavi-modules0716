@@ -15,5 +15,5 @@ class UserCreation(models.Model):
         # sms_gateway_url = params.get_param('smart_gateway_url')
         # sms_gateway_token = params.get_param('smart_gateway_token')
         user = AradialAPIGateway()
-        sent_sms = user.create_user()
-        self.env.cr.commit()
+        created_user = user.create_user()
+        
