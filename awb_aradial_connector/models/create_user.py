@@ -8,7 +8,7 @@ _logger = logging.getLogger(__name__)
 
 class UserCreation(models.Model):
 
-    _name = 'awb.aradial.connector'
+    _name = 'awb.aradial.connect'
     _description = 'AWB Aradial Connector'
 
     def test_function(self):
