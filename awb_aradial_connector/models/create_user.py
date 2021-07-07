@@ -12,11 +12,11 @@ class UserCreation(models.Model):
     _description = 'AWB Aradial Connector'
 
     def test_function(self):
-        print('===== Created User =====', flush=True)
-        print('=====  =====', flush=True)
-        print('=====  =====', flush=True)
-        print('=====  =====', flush=True)
-        print('===== Created User =====', flush=True)        
+        _logger.info('===== Created User =====')
+        _logger.info('=====  =====')
+        _logger.info('=====  =====')
+        _logger.info('=====  =====')
+        _logger.info('===== Created User =====')        
 
     def user_creation(self):
 
@@ -29,9 +29,9 @@ class UserCreation(models.Model):
             token=aradial_token
         )
         created_user = user.create_user()
-        print('===== Created User =====', flush=True)
-        print('===== , created_user , =====', flush=True)
-        print('===== Created User =====', flush=True)
+        _logger.info('===== Created User =====')
+        _logger.info('===== , created_user , =====')
+        _logger.info('===== Created User =====')
 
-        _logger = logging.getLogger(created_user)
+        _logger.info(created_user)
         
