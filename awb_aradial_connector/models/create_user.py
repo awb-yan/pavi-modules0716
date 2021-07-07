@@ -11,8 +11,6 @@ class UserCreation(models.Model):
     _name = 'awb.aradial.connector'
     _description = 'AWB Aradial Connector'
 
-
-    @api.model
     def test_function(self):
         print('===== Created User =====', flush=True)
         print('=====  =====', flush=True)
@@ -20,7 +18,6 @@ class UserCreation(models.Model):
         print('=====  =====', flush=True)
         print('===== Created User =====', flush=True)        
 
-    @api.model
     def user_creation(self):
         _name = 'awb.aradial.connector'
         _description = 'AWB Aradial Connector'
