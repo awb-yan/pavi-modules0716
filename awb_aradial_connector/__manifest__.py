@@ -18,7 +18,7 @@
     'version': '13.0.1.0.0',
     'depends': ['base'],
     'data': [],
-    'installable': False,
+    'installable': True,
     'application': False,
-    'auto_install': True
+    'auto_install': False
 }
