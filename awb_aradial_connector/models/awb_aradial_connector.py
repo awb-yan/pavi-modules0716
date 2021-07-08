@@ -16,7 +16,7 @@ class AWBAradialConnector(models.Model):
 
         sql = """
             SELECT subs.name, subs.code AS userid, line.product_id
-            FROM sale_subscription AS subs
+            FROM sale_subscription AS subs,
             sale_subscription_line AS line
             WHERE line.product_id IN (subs.recurring_invoice_line_ids)
             LIMIT 1
