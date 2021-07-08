@@ -18,11 +18,11 @@ class AWBAradialConnector(models.Model):
             SELECT subs.name, subs.code as userid
             FROM sale_subscription as subs,
             sale_subscription_line as line
-            WHERE subs.partner_id IN {
+            WHERE subs.partner_id IN (
                 select id
                 from res_partner
                 where res_partner.location IS NOT NULL
-            }
+            )
             AND subs.atm_ref IS NOT NULL 
             AND subs.stage_id IN (
                 SELECT id
