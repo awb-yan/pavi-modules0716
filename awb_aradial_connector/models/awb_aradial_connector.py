@@ -42,8 +42,8 @@ class AWBAradialConnector(models.Model):
             # AND subs.partner_id = (yung nagtrigger)
 
 
-        self.env.cr.execute(sql)
-        records = self.env.cr.fetchall()
+        # self.env.cr.execute(sql)
+        # records = self.env.cr.fetchall()
 
         # Converts result ids to a model object
         # records = model.browse([rec[0] for rec in records])
