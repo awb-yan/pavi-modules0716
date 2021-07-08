@@ -14,28 +14,42 @@ class AWBAradialConnector(models.Model):
 
     def create_user(self):
 
-        # sql = select name, partner_id from sale.subsription
-        #   where subscriber_location_id is not null 
-        #   and atm_ref is not null 
-        #   and subscription_status === draft 
-        #   and partner_id = (yung nagtrigger)
-        # execute (sql)
-        # records = fetchall()
+        sql = """
+            SELECT subs.name, subs.code as userid, line.display_name as offer
+            FROM sale.subsription subs,
+            sale.subscription.line line
+            WHERE subs.subscriber_location_id IS NOT NULL 
+            AND subs.atm_ref IS NOT NULL 
+            AND subs.stage_id = (
+                SELECT id
+                FROM sale.subscription.stage
+                WHERE name = 'Draft'
+            ) 
+            AND subs.recurring_invoice_line_ids = line.product_id
+        """
+            # AND subs.partner_id = (yung nagtrigger)
 
-        # kung records.length > 0
-        #   continue process
 
+        self.env.cr.execute(sql)
+        records = self.env.cr.fetchall()
 
-        params = self.env['ir.config_parameter'].sudo()
-        aradial_url = params.get_param('aradial_url')
-        aradial_token = params.get_param('aradial_token')
+        # Converts result ids to a model object
+        # records = model.browse([rec[0] for rec in records])
+        _logger.info("Sending SMS to:")
+        _logger.info(records)
+        _logger.info(("Records Count: %s") % len(records))
 
-        user = AradialAPIGateway(
-            url=aradial_url,
-            token=aradial_token
-            # , records = records
-        )
-        created_user = user.create_user()
+        # if records:
+        #     params = self.env['ir.config_parameter'].sudo()
+        #     aradial_url = params.get_param('aradial_url')
+        #     aradial_token = params.get_param('aradial_token')
 
-        _logger.info(created_user)
+        #     user = AradialAPIGateway(
+        #         url=aradial_url,
+        #         token=aradial_token
+        #         , records = records
+        #     )
+        #     created_user = user.create_user()
+
+        #     _logger.info(created_user)
         
