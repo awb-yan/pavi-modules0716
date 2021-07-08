@@ -15,7 +15,7 @@ class AWBAradialConnector(models.Model):
     def create_user(self):
 
         sql = """
-            SELECT subs.name, subs.code as userid, line.display_name as offer
+            SELECT subs.name, subs.code as userid
             FROM sale_subscription as subs,
             sale_subscription_line as line
             WHERE subs.subscriber_location_id IS NOT NULL 
@@ -25,8 +25,9 @@ class AWBAradialConnector(models.Model):
                 FROM sale_subscription_stage
                 WHERE name = 'Draft'
             ) 
-            AND subs.recurring_invoice_line_ids = line.product_id
         """
+        # , line.display_name as offer
+        #     AND subs.recurring_invoice_line_ids = line.product_id
             # AND subs.partner_id = (yung nagtrigger)
 
 
