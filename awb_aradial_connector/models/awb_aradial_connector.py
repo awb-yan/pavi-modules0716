@@ -1,4 +1,4 @@
-from ..api_aradial_gateway.create_user import AradialAPIGateway
+from ..api.aradial_gateway.create_user import AradialAPIGateway
 from odoo import api, fields, models, exceptions, _
 from psycopg2.extensions import AsIs
 import datetime
@@ -14,6 +14,18 @@ class AWBAradialConnector(models.Model):
 
     def create_user(self):
 
+        # sql = select name, partner_id from sale.subsription
+        #   where subscriber_location_id is not null 
+        #   and atm_ref is not null 
+        #   and subscription_status === draft 
+        #   and partner_id = (yung nagtrigger)
+        # execute (sql)
+        # records = fetchall()
+
+        # kung records.length > 0
+        #   continue process
+
+
         params = self.env['ir.config_parameter'].sudo()
         aradial_url = params.get_param('aradial_url')
         aradial_token = params.get_param('aradial_token')
@@ -21,6 +33,7 @@ class AWBAradialConnector(models.Model):
         user = AradialAPIGateway(
             url=aradial_url,
             token=aradial_token
+            # , records = records
         )
         created_user = user.create_user()
 
