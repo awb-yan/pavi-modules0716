@@ -15,10 +15,10 @@ class AWBAradialConnector(models.Model):
     def create_user(self):
 
         sql = """
-            SELECT subs.name, subs.code AS userid, line.product_id AS offer
-            FROM sale_subscription AS subs,
-            sale_subscription_line AS line
-            WHERE subs.recurring_invoice_line_ids = line.product_id
+            SELECT subs.name, subs.code AS userid, subs.recurring_invoice_line_ids AS offer
+            FROM sale_subscription AS subs
+            WHERE subs.date IS NULL
+            LIMIT 1
         """
         # , line.display_name as offer
             # WHERE subs.partner_id IN (
