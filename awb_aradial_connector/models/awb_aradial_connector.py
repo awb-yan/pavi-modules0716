@@ -16,13 +16,13 @@ class AWBAradialConnector(models.Model):
 
         sql = """
             SELECT subs.name, subs.code as userid, line.display_name as offer
-            FROM sale_subsription subs,
+            FROM sale_subscription subs,
             sale_subscription_line line
             WHERE subs.subscriber_location_id IS NOT NULL 
             AND subs.atm_ref IS NOT NULL 
             AND subs.stage_id = (
                 SELECT id
-                FROM sale.subscription.stage
+                FROM sale_subscription_stage
                 WHERE name = 'Draft'
             ) 
             AND subs.recurring_invoice_line_ids = line.product_id
