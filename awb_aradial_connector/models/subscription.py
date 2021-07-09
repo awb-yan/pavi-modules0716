@@ -1,11 +1,11 @@
-from ..api.aradial_gateway.create_user import AradialAPIGateway
 from odoo import api, fields, models, exceptions, _
 import logging
 
 _logger = logging.getLogger(__name__)
 
-class Subscription(models.Model):
+class Subscription(models.TransientModel):
     _inherit = 'sale.subscription'
+    _name = 'awb.subscription'
 
     def validate_parameters(
         self,
