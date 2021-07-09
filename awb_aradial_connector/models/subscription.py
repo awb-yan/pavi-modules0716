@@ -5,6 +5,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 class Subscription(models.Model):
+    _inherit = 'sale.subscription'
 
     def validate_parameters(
         self,
@@ -32,6 +33,7 @@ class Subscription(models.Model):
         self,
         record=None
     ):
+        
         _logger.info("=== Subscription ===")
 
         # if not record:
