@@ -3,33 +3,11 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
-class AWBSubscription(models.Model):
-    _name = 'awb.subscription'
-    _description = 'AWB Subscription'
-
-    def validate_parameters(
-        self,
-        location,
-        atm_ref,
-        stage
-    ):
-        _logger.info("Validating Subcription")
-
-        if not location:
-            _logger.info("Location is required")
-            return False
-        if not atm_ref:
-            _logger.info("atm_ref is required")
-            return False
-        if stage != 'Draft':
-            _logger.info("Stage should be in Draft")
-            return False
-
-        _logger.info("Valid Subscription")
-        return True
+class Subscription(models.Model):
+    _inherit = 'sale.subscription'
 
     
-    def subscription(
+    def create_aradial_user(
         self,
         record=None
     ):
@@ -81,6 +59,27 @@ class AWBSubscription(models.Model):
         # _logger.info("Offer: %s" % self.data['Offer'])
         # self.env['awb.aradial.connector'].create_user(self.data)
 
+
+    def _validate_parameters(
+        self,
+        location,
+        atm_ref,
+        stage
+    ):
+        _logger.info("Validating Subcription")
+
+        if not location:
+            _logger.info("Location is required")
+            return False
+        if not atm_ref:
+            _logger.info("atm_ref is required")
+            return False
+        if stage != 'Draft':
+            _logger.info("Stage should be in Draft")
+            return False
+
+        _logger.info("Valid Subscription")
+        return True
 
 
 
