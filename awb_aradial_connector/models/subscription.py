@@ -19,7 +19,7 @@ class Subscription(models.Model):
                 ("Record is required")
             )
         
-        is_valid = self.validate_parameters(
+        is_valid = self._validate_parameters(
             record.subcriber_location_id,
             record.atm_ref,
             record.stage_id.name
