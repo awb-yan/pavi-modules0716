@@ -13,24 +13,27 @@ class AWBAradialConnector(models.Model):
 
 
     def create_user(self):
-        sale_subscription_obj = self.env['sale.subscription']
-        _logger.info(sale_subscription_obj)
-        args = [
-            # ("atm_ref", "!=", ""),
-            #     ("partner_id.location", "!=", ""),
-                ("stage_id.name", "in", "Draft")
-                ]
-        _logger.info(args)
-        records = sale_subscription_obj.search(args)
-        _logger.info(records)
+        # sale_subscription_obj = self.env['sale.subscription']
+        # _logger.info(sale_subscription_obj)
+        # args = [
+        #     # ("atm_ref", "!=", ""),
+        #     #     ("partner_id.location", "!=", ""),
+        #         ("stage_id.name", "in", "Draft")
+        #         ]
+        # _logger.info(args)
+        # records = sale_subscription_obj.search(args)
+        # _logger.info(records)
 
-        # sql = """
-        #     SELECT subs.name, subs.code AS userid, line.product_id
-        #     FROM sale_subscription AS subs,
-        #     sale_subscription_line AS line
-        #     WHERE line.product_id = subs.recurring_invoice_line_ids.product_id
-        #     LIMIT 1
-        # """
+        sql = """
+            SELECT subs.name, subs.code AS userid, line.product_id
+            FROM sale_subscription AS subs,
+            sale_subscription_line AS line
+            WHERE line.name IN subs.recurring_invoice_line_ids.product_id
+            LIMIT 1
+        """
+        self.env.cr.execute(sql)
+        records = self.env.cr.fetchall()
+
         # , line.display_name as offer
             # WHERE subs.partner_id IN (
             #     select id
@@ -47,8 +50,6 @@ class AWBAradialConnector(models.Model):
             # AND subs.partner_id = (yung nagtrigger)
 
 
-        # self.env.cr.execute(sql)
-        # records = self.env.cr.fetchall()
 
         # Converts result ids to a model object
         # records = model.browse([rec[0] for rec in records])
