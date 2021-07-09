@@ -6,6 +6,7 @@ _logger = logging.getLogger(__name__)
 class Subscription(models.TransientModel):
     _inherit = 'sale.subscription'
     _name = 'awb.subscription'
+    _description = 'AWB Subscription'
 
     def validate_parameters(
         self,
