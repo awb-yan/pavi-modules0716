@@ -5,7 +5,6 @@ _logger = logging.getLogger(__name__)
 
 class AWBSubscription(models.Model):
     _name = 'awb.subscription'
-    _inherit = 'sale.subscription'
     _description = 'AWB Subscription'
 
     def validate_parameters(
