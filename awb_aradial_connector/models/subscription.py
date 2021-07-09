@@ -43,7 +43,7 @@ class Subscription(models.Model):
         }
 
 
-        self.env['awb.aradial.connector'].create_user(self.data)
+        self.env['aradial.connector'].create_user(self.data)
 
 # YAN: for testing
         # self.data = {
