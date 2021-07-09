@@ -13,18 +13,15 @@ class AWBAradialConnector(models.Model):
 
 
     def create_user(self):
-        sale_subscription_obj = self.env['sale.subscription']
-        args = [("atm_ref", "!=", ""),
-                ("partner_id.location", "!=", ""),
-                ("stage_id.name", "in", "Draft")]
-        records = sale_subscription_obj.search(args)
 
-        # sql = """
-        #     SELECT subs.name, subs.code AS userid, line.product_id
-        #     FROM sale_subscription AS subs,
-        #     sale_subscription_line AS line
-        #     WHERE line.product_id = subs.recurring_invoice_line_ids.product_id
-        #     LIMIT 1
+        sql = """
+            SELECT subs.name, subs.code AS userid, line.product_id
+            FROM sale_subscription AS subs,
+            sale_subscription_line AS line
+            WHERE line.product_id IN (
+                select product_id
+                from sale_subscription.recurring_invoice_line_ids
+            )
         # """
         # , line.display_name as offer
             # WHERE subs.partner_id IN (
