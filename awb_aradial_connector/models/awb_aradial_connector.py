@@ -8,7 +8,7 @@ _logger = logging.getLogger(__name__)
 
 class AWBAradialConnector(models.Model):
 
-    _name = 'awb.aradial.connector'
+    _name = 'aradial.connector'
     _description = 'AWB Aradial Connector'
 
     def create_user(
