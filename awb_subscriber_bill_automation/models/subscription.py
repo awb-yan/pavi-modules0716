@@ -47,9 +47,8 @@ class SaleSubscription(models.Model):
             lambda code: code.is_active == True
         )
 
-# YANYAN
-#         if not code_seq:
-#             raise UserError("No Active company code, Please check your company code settings")
+        if not code_seq:
+            raise UserError("No Active company code, Please check your company code settings")
 
         vals['atm_ref_sequence'] = code_seq[0]._get_seq_count()
 
