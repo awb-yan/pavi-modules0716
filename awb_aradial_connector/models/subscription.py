@@ -14,39 +14,36 @@ class Subscription(models.Model):
         
         _logger.info("=== Subscription ===")
 
-        if not record:
-            raise exceptions.ValidationError(
-                ("Record is required")
-            )
+        # if not record:
+        #     raise exceptions.ValidationError(
+        #         ("Record is required")
+        #     )
         
-        is_valid = self._validate_parameters(
-            record.subcriber_location_id,
-            record.atm_ref,
-            record.stage_id.name
-        )
+        # is_valid = self._validate_parameters(
+        #     record.subcriber_location_id,
+        #     record.atm_ref,
+        #     record.stage_id.name
+        # )
 
-        if is_valid == True:
+        # if is_valid == True:
 
-            products = ""
+        #     products = ""
 
-            for line_id in record.recurring_invoice_line_ids:
-                products += line_id.name + " "
+        #     for line_id in record.recurring_invoice_line_ids:
+        #         products += line_id.name + " "
 
-            self.data = {
-                'UserID': record.code,
-                'Password': 'password',         # TODO: call password generator
-                'Offer': products,
-                'ServiceType': '',
-                'FirstName': '',
-                'LastName': '',
-                'CustomInfo1': ''
-            }
+        self.data = {
+            'UserID': 'Yan',
+            'Password': 'password',         # TODO: call password generator
+            'Offer': 'Unlimited',
+            'ServiceType': 'Internet',
+            'FirstName': 'Yan',
+            'LastName': 'Yan',
+            'CustomInfo1': 'VDH'
+        }
 
-            _logger.info("User Details:")
-            _logger.info("UserID: %s" % self.data['UserID'])
-            _logger.info("Offer: %s" % self.data['Offer'])
 
-            self.env['awb.aradial.connector'].create_user(self.data)
+        self.env['awb.aradial.connector'].create_user(self.data)
 
 # YAN: for testing
         # self.data = {
