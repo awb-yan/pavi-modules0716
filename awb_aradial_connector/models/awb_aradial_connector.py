@@ -25,10 +25,8 @@ class AWBAradialConnector(models.Model):
         # _logger.info(records)
 
         sql = """
-            SELECT subs.name, subs.code AS userid, line.product_id
-            FROM sale_subscription AS subs,
-            sale_subscription_line AS line
-            WHERE line.name IN subs.recurring_invoice_line_ids.product_id
+            SELECT subs.name, subs.code AS userid, subs.recurring_invoice_line_ids.product_id
+            FROM sale_subscription AS subs
             LIMIT 1
         """
         self.env.cr.execute(sql)
