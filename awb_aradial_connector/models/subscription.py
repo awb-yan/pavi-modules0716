@@ -64,7 +64,15 @@ class AWBSubscription(models.Model):
         #     _logger.info("UserID: %s" % record.code)
         #     _logger.info("Offer: %s" % products)
 
-        #     self.env['awb.aradial.connector'].create_user(self.data)
+        self.data = {
+            'UserID': 'yan',
+            'Password': 'password',         # TODO: call password generator
+            'Offer': 'Unlimited'
+        }
+        _logger.info("User Details:")
+        _logger.info("UserID: %s" % self.data['UserID'])
+        _logger.info("Offer: %s" % self.data['Offer'])
+        self.env['awb.aradial.connector'].create_user(self.data)
 
 
 
