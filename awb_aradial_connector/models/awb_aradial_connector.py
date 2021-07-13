@@ -20,16 +20,23 @@ class AWBAradialConnector(models.Model):
 
         params = self.env['ir.config_parameter'].sudo()
         aradial_url = params.get_param('aradial_url')
-        aradial_token = params.get_param('aradial_token')
+        aradial_username = params.get_param('aradial_username')
+        aradial_password = params.get_param('aradial_password')
 
         _logger.info("Calling API %s" % aradial_url)
         
         user = AradialAPIGateway(
             url=aradial_url,
-            token=aradial_token,
+            username=aradial_username,
+            password=aradial_password,
             data=data
         )
         created_user = user.create_user()
 
         _logger.info("User Creation: %s" % created_user)
+
+        if created_user == "Success":
+            return True
+        else:
+            return False
     
