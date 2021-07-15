@@ -13,6 +13,16 @@ class SalesForceImporterCustomers(models.Model):
     def import_customers(self, Auto):
         _logger.info('----------------- STREAMTECH import_opportunities')
         if not self.sales_force:
+            IrConfigParameter = self.env['ir.config_parameter'].sudo()
+            username = IrConfigParameter.get_param('odoo_salesforce.sf_username')
+            password = IrConfigParameter.get_param('odoo_salesforce.sf_password')
+            security = IrConfigParameter.get_param('odoo_salesforce.sf_security_token')
+
+            _logger.info(username)
+            _logger.info(password)
+            _logger.info(security)
+            _logger.info('------------- END')
+
             self.connect_to_salesforce()
 
         # Field/s removed due to errors found with usage with PAVI SalesForce:
