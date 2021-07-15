@@ -24,6 +24,8 @@ class SalesForceImporterCustomers(models.Model):
             _logger.info('------------- END')
 
             self.connect_to_salesforce()
+            _logger.info(self.sales_force)
+            _logger.info('------------- END')
 
         # Field/s removed due to errors found with usage with PAVI SalesForce:
         query = f"""
